@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CashFlow.Exception.ExceptionsBase
 {
-    public abstract class CashFlowException : SystemException
+    public class NotFoundException : CashFlowException
     {
-        protected CashFlowException(string message) : base(message)
+        public NotFoundException(string message) : base(message)
         {
             
         }

@@ -1,8 +1,13 @@
-﻿using CashFlow.Domain.Enums;
+﻿using CashFlow.Communication.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CashFlow.Domain.Entities
+namespace CashFlow.Communication.Responses
 {
-    public class Expense
+    public class ResponseExpenseJson
     {
         public long Id { get; set; }
         public string Title { get; set; }

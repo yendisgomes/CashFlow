@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace CashFlow.Domain.Repositories.Expenses
 {
-    public interface IExpensesRepository
+    public interface IExpenseWriteOnlyRepository
     {
         Task Add(Expense expense);
-        Task<List<Expense>> GetAll();
-        Task<Expense?> GetById(long id);
     }
 }

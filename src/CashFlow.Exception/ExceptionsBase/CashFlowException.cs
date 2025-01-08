@@ -10,7 +10,10 @@ namespace CashFlow.Exception.ExceptionsBase
     {
         protected CashFlowException(string message) : base(message)
         {
-            
+
         }
+
+        public abstract int StatusCode { get; }
+        public abstract List<string> GetErros();
     }
 }

@@ -10,18 +10,18 @@ namespace CashFlow.Application.UseCases.Expenses.Register
 {
     public class RegisterExpenseUseCase : IRegisterExpenseUseCase
     {
-        private readonly IExpenseWriteOnlyRepository _repository;
+        private readonly IExpensesWriteOnlyRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public RegisterExpenseUseCase(IExpenseWriteOnlyRepository repository, IUnitOfWork unitOfWork, IMapper mapper)
+        public RegisterExpenseUseCase(IExpensesWriteOnlyRepository repository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<ResponseRegisteredExpenseJson> Execute(RequestRegisterExpenseJson request)
+        public async Task<ResponseRegisteredExpenseJson> Execute(RequestExpenseJson request)
         {
             Validate(request);
 
@@ -33,9 +33,9 @@ namespace CashFlow.Application.UseCases.Expenses.Register
             return _mapper.Map<ResponseRegisteredExpenseJson>(entity);
         }
 
-        private void Validate(RequestRegisterExpenseJson request)
+        private void Validate(RequestExpenseJson request)
         {
-            var validator = new ResgisterExpenseValidator();
+            var validator = new ExpenseValidator();
             var result = validator.Validate(request);
 
             if (result.IsValid == false)

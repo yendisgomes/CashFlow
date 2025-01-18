@@ -1,5 +1,4 @@
 ﻿using Bogus;
-using Bogus.DataSets;
 using CashFlow.Communication.Requests;
 
 namespace CommonTestUtilities.Requests

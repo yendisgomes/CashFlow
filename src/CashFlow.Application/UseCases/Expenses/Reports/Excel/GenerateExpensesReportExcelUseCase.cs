@@ -17,7 +17,7 @@ namespace CashFlow.Application.UseCases.Expenses.Reports.Excel
 
         public async Task<byte[]> Execute(DateOnly month)
         {
-            var expenses = await _repository.FiltertByMonth(month);
+            var expenses = await _repository.FilterByMonth(month);
             if (expenses.Count == 0)
                 return [];
 

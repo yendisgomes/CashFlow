@@ -3,7 +3,6 @@ using CashFlow.Exception;
 using CashFlow.Exception.ExceptionsBase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System.Runtime.CompilerServices;
 
 namespace CashFlow.Api.Filters
 {
@@ -28,25 +27,6 @@ namespace CashFlow.Api.Filters
 
             context.HttpContext.Response.StatusCode = cashFlowException.StatusCode;
             context.Result = new ObjectResult(errorResponse);
-
-            //if (context.Exception is ErrorOnValidationException errorOnValidation)
-            //{
-            //    var errorResponse = new ResponseErrorJson(errorOnValidation.Errors);
-            //    context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-            //    context.Result = new BadRequestObjectResult(errorResponse);
-            //}
-            //else if (context.Exception is NotFoundException notFoundException) 
-            //{
-            //    var errorResponse = new ResponseErrorJson(notFoundException.Message);
-            //    context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
-            //    context.Result = new BadRequestObjectResult(errorResponse);
-            //}
-            //else
-            //{
-            //    var errorResponse = new ResponseErrorJson(context.Exception.Message);
-            //    context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-            //    context.Result = new BadRequestObjectResult(errorResponse);
-            //}
         }
 
         private void ThrowUnkownError(ExceptionContext context)

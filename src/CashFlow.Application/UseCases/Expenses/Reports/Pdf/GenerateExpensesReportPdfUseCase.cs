@@ -2,6 +2,7 @@
 using CashFlow.Domain.Reports;
 using CashFlow.Domain.Repositories.Expenses;
 using MigraDoc.DocumentObjectModel;
+using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using PdfSharp.Fonts;
 
@@ -27,7 +28,23 @@ namespace CashFlow.Application.UseCases.Expenses.Reports.Pdf
             var document = CreateDocument(month);
             var page = CreatePage(document);
 
+
+            var table = page.AddTable();
+            table.AddColumn();
+            table.AddColumn("300");
+
+            var row = table.AddRow();
+            row.Cells[0].AddImage("");
+
+            row.Cells[1].AddParagraph("Hey, X");
+            row.Cells[1].Format.Font = new Font { Name = FontHelper.RALEWAY_BLACK, Size = 16 };
+            row.Cells[1].VerticalAlignment = VerticalAlignment.Center;
+
+
             var paragraph = page.AddParagraph();
+            paragraph.Format.SpaceBefore = "40";
+            paragraph.Format.SpaceAfter = "40";
+
             var title = string.Format(ResourceReportGenerationMessages.TOTAL_SPENT_IN, month.ToString("Y"));
 
             paragraph.AddFormattedText(title, new Font { Name = FontHelper.RALEWAY_REGULAR, Size = 15 });

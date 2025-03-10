@@ -3,7 +3,6 @@ using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
 using CashFlow.Domain.Entities;
 using CashFlow.Domain.Repositories;
-using CashFlow.Domain.Repositories.Expenses;
 using CashFlow.Domain.Repositories.User;
 using CashFlow.Domain.Security.Crryptography;
 using CashFlow.Domain.Security.Tokens;
@@ -25,8 +24,8 @@ namespace CashFlow.Application.UseCases.Users.Register
         public RegisterUserUseCase(IMapper mapper, IPasswordEncripter passwordEncripter,
             IUserReadOnlyRepository userReadOnlyRepository,
             IUserWriteOnlyRepository userWriteOnlyRepository,
-            IUnitOfWork unitOfWork,
-            IAccessTokenGenerator tokenGenerator)
+            IAccessTokenGenerator tokenGenerator,
+            IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _passwordEncripter = passwordEncripter;

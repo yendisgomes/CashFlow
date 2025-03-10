@@ -13,8 +13,10 @@ namespace Validators.Tests.Users.Register
             //Arrange
             var validator = new RegisterUserValidator();
             var request = RequestRegisterUserJsonBuilder.Build();
+
             //Act
             var result = validator.Validate(request);
+
             //Assert
             result.IsValid.Should().BeTrue();
         }
@@ -39,7 +41,7 @@ namespace Validators.Tests.Users.Register
         [InlineData("")]
         [InlineData("      ")]
         [InlineData(null)]
-        public void Error_Email_Invalid(string email)
+        public void Error_Email_Empty(string email)
         {
             var validator = new RegisterUserValidator();
             var request = RequestRegisterUserJsonBuilder.Build();
@@ -48,7 +50,33 @@ namespace Validators.Tests.Users.Register
             var result = validator.Validate(request);
 
             result.IsValid.Should().BeFalse();
-            result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.NAME_EMPTY));
+            result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.EMAIL_EMPTY));
+        }
+
+        [Fact]
+        public void Error_Email_Invalid()
+        {
+            var validator = new RegisterUserValidator();
+            var request = RequestRegisterUserJsonBuilder.Build();
+            request.Email = "teste@teste.com";
+
+            var result = validator.Validate(request);
+
+            result.IsValid.Should().BeFalse();
+            result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.EMAIL_INVALID));
+        }
+
+        [Fact]
+        public void Error_Password_Empty()
+        {
+            var validator = new RegisterUserValidator();
+            var request = RequestRegisterUserJsonBuilder.Build();
+            request.Password = string.Empty;
+
+            var result = validator.Validate(request);
+
+            result.IsValid.Should().BeFalse();
+            result.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.INVALID_PASSWORD));
         }
     }
 }
